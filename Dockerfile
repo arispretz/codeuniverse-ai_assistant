@@ -34,4 +34,4 @@ EXPOSE 7860
 ENV PYTHON_ENV=production
 
 # Run FastAPI with Uvicorn (production mode)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860", "--workers", "2"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860", "--workers", "2"]
