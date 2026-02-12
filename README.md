@@ -7,9 +7,9 @@ Provides code generation, error detection, and optimization suggestions using de
 
 ## 🔗 Associated Repositories
 
-- [Frontend (codeuniverse)](https://github.com/arispretz/codeuniverse.git)
-- [Backend (codeuniverse-demo-backend)](https://github.com/arispretz/codeuniverse-demo-backend.git)
-- [Codeuniverse-Demo (codeuniverse-demo)](https://github.com/arispretz/codeuniverse-demo.git)
+- [Frontend (codeuniverse-frontend)](https://github.com/arispretz/codeuniverse-frontend.git)
+- [Backend (codeuniverse-backend)](https://github.com/arispretz/codeuniverse-backend.git)
+- [Codeuniverse-App (codeuniverse-app)](https://github.com/arispretz/codeuniverse-app.git)
 
 ---
 
