@@ -12,10 +12,17 @@ from ml_engine import (
 from db import connect_db, close_db
 from auth import verify_token
 from dotenv import load_dotenv
+import logging
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(dotenv_path=os.path.join(PROJECT_ROOT, ".env.test"))
 print("TEST_MODE =", os.getenv("TEST_MODE"))
+
+logging.basicConfig(
+    level=logging.INFO, 
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler()]  
+)
 
 app = FastAPI()
 
@@ -95,6 +102,9 @@ async def reply(data: CodeRequest, user=Depends(verify_token)):
         dict: Explanation reply and duration.
     """
     try:
+        logging.debug("Payload received: %s", data.dict()) 
+        logging.debug("User: %s", user)
+
         start = time.time()
         response = generate_reply(
             data.prompt,
@@ -103,6 +113,9 @@ async def reply(data: CodeRequest, user=Depends(verify_token)):
             user["uid"],
             data.user_level
         )
+        
+        logging.debug("Model response: %s", response)
+
         duration = time.time() - start
 
         if not response or response.startswith("⚠️") or response.startswith("❌"):
@@ -126,6 +139,9 @@ async def reply_code_only(data: CodeRequest, user=Depends(verify_token)):
         dict: Generated code and duration.
     """
     try:
+        logging.debug("Payload received: %s", data.dict()) 
+        logging.debug("User: %s", user)
+
         start = time.time()
         response = generate_reply_code_only(
             data.prompt,
@@ -133,6 +149,9 @@ async def reply_code_only(data: CodeRequest, user=Depends(verify_token)):
             data.code,
             user["uid"]
         )
+
+        logging.debug("Model response: %s", response)
+        
         duration = time.time() - start
 
         if not response or response.startswith("⚠️") or response.startswith("❌"):

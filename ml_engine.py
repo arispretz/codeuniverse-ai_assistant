@@ -3,6 +3,7 @@ from huggingface_hub import hf_hub_download
 import os
 import traceback
 import re
+import logging
 
 _llm = None
 
@@ -42,6 +43,8 @@ def generate_response(prompt: str, max_tokens: int = 128, temperature: float = 0
             temperature=temperature,
             stop=stop or ["</s>", "###"]
         )
+
+        logging.debug("Raw model output: %s", output)
 
         if "choices" not in output or len(output["choices"]) == 0:
             return "⚠️ ERROR: Empty model output"
