@@ -3,6 +3,7 @@ import json
 import firebase_admin
 from firebase_admin import credentials, auth
 from fastapi import Header, HTTPException
+import logging, traceback
 
 # Only initialize Firebase if not in test mode
 if os.getenv("TEST_MODE") != "true":
@@ -36,6 +37,9 @@ def verify_token(authorization: str = Header(...)):
         decoded = auth.verify_id_token(token)
         return decoded
     except Exception as e:
-        print("❌ Firebase token verification failed:", e)
+        logging.error("❌ Firebase token verification failed: %s", e)
+        logging.error(traceback.format_exc())
         raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+
 
