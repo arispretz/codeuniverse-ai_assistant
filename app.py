@@ -24,7 +24,14 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-app = FastAPI()
+app = FastAPI(
+    title="Code Assistant API",
+    description="FastAPI backend for code assistant",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
 
 allowed_origins = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
 app.add_middleware(
