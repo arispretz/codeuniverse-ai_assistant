@@ -35,5 +35,7 @@ def verify_token(authorization: str = Header(...)):
     try:
         decoded = auth.verify_id_token(token)
         return decoded
-    except Exception:
+    except Exception as e:
+        print("❌ Firebase token verification failed:", e)
         raise HTTPException(status_code=401, detail="Invalid or expired token")
+
