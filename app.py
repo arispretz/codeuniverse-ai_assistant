@@ -42,6 +42,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
+
 @app.get("/")
 def root():
     return {"message": "Code Assistant API is running"}
