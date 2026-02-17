@@ -143,32 +143,3 @@ async def reply_code_only(data: CodeRequest, user=Depends(verify_token)):
         print("Error in /reply-code-only:", traceback.format_exc())
         return {"code": f"⚠️ Internal assistant error ({str(e)})"}
 
-@app.post("/classify")
-async def classify(request: Request, user=Depends(verify_token)):
-    """
-    Classify text sentiment as positive, negative, or neutral.
-
-    Args:
-        request (Request): Request containing text to classify.
-        user (dict): Authenticated user information.
-
-    Returns:
-        dict: Original text and classification label.
-    """
-    try:
-        data = await request.json()
-        text = data.get("text", "").lower()
-
-        positive_words = ["good", "excellent", "happy", "fantastic", "positive", "great", "wonderful"]
-        negative_words = ["bad", "terrible", "sad", "horrible", "negative", "awful", "fatal"]
-
-        if any(word in text for word in positive_words):
-            label = "positive"
-        elif any(word in text for word in negative_words):
-            label = "negative"
-        else:
-            label = "neutral"
-
-        return {"text": text, "classification": label}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
