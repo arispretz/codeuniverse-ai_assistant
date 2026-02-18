@@ -22,7 +22,7 @@ print("TEST_MODE =", os.getenv("TEST_MODE"))
 
 # --- Logging configuration ---
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[logging.StreamHandler()]
 )
