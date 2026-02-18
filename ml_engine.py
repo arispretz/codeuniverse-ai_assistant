@@ -24,7 +24,7 @@ def _load_model():
         filename = os.getenv("HF_FILENAME")
         local_dir = os.getenv("HF_LOCAL_DIR")
 
-        print(f"📥 Downloading model {repo_id}/{filename} to {local_dir}")
+        print(f"📥 Downloading model")
         model_path = hf_hub_download(repo_id=repo_id, filename=filename, local_dir=local_dir)
 
         _llm = Llama(model_path=model_path, n_threads=4, n_ctx=512, n_batch=128, temperature=0.6, verbose=False)
