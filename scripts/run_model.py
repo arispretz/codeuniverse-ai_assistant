@@ -52,7 +52,7 @@ def run_prompt(prompt: str, mode: str = "mentor", language: str = "python") -> s
     return output["choices"][0]["text"]
 
 if __name__ == "__main__":
-    print("=== Code Assistant (CodeLlama) ===")
+    print("=== Code Assistant ===")
     print("Type your questions. Use Ctrl+C to exit.\n")
 
     while True:
